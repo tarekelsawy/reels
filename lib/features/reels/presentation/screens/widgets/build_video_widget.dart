@@ -29,7 +29,6 @@ class BuildVideoWidget extends StatelessWidget {
               width: 1.sw,
               child: Chewie(controller: cubit.chewieController));
         }
-
         return widget;
       },
     );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reels/core/utils/api_service.dart';
+import 'package:reels/core/utils/app_colors.dart';
 import 'package:reels/core/utils/app_strings.dart';
 import 'package:reels/features/reels/data/repo/reels_repo.dart';
 import 'package:reels/features/reels/presentation/manager/reels_cubit/reels_cubit.dart';
@@ -20,12 +21,14 @@ class ReelsApp extends StatelessWidget {
       splitScreenMode: false,
       builder: (_, child) {
         return BlocProvider(
+          lazy: false,
           // todo should use service locator here
           create: (context) => ReelsCubit(repo: ReelsRepo(apiService: ApiService(Dio())))..getReels(),
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: AppStrings.appTitle,
             theme: ThemeData(
+              scaffoldBackgroundColor: AppColors.backGroundOfcircularPrograssIndicatorColor,
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),

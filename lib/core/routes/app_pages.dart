@@ -11,7 +11,7 @@ class AppPages {
       case AppRoutes.initial:
         return MaterialPageRoute(builder: (context) => const SplashScreen());
       case AppRoutes.reels:
-        return MaterialPageRoute(builder: (context) =>  ReelsScreen());
+        return MaterialPageRoute(builder: (context) =>  const ReelsScreen());
     }
     return undefinedRoute();
   }

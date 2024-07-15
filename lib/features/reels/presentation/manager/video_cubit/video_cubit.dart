@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reels/features/reels/presentation/manager/video_cubit/video_states.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../../core/config/cache_config.dart';
+
 class VideoCubit extends Cubit<VideoStates> {
   late final VideoPlayerController _videoPlayerController;
   late final ChewieController _chewieController;
@@ -25,8 +27,14 @@ class VideoCubit extends Cubit<VideoStates> {
     emit(VideoLoadingState());
 
     try {
-      _videoPlayerController =
-          VideoPlayerController.networkUrl(Uri.parse(videoName));
+      var fileInfo = await kCacheManager.getFileFromCache(videoName);
+      debugPrint('after getFileFromCache $fileInfo');
+      if (fileInfo == null) {
+        await kCacheManager.downloadFile(videoName);
+        fileInfo = await kCacheManager.getFileFromCache(videoName);
+        debugPrint('after getFileFromCache $fileInfo case of null');
+      }
+      _videoPlayerController = VideoPlayerController.file(fileInfo!.file);
 
       debugPrint('after asset video');
 

@@ -7,4 +7,9 @@ class Styles {
     fontSize: 30.sp,
     fontWeight: FontWeight.bold,
   );
+  // splash screen text style
+  static TextStyle textStyle20 = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+  );
 }

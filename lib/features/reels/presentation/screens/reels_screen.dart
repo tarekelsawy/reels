@@ -28,10 +28,16 @@ class ReelsScreen extends StatelessWidget {
             return PageView.builder(
               scrollDirection: Axis.vertical,
               itemCount: cubit.reels.length,
+              onPageChanged: (value) {
+                debugPrint('value $value');
+                cubit.onPageChange(value);
+              },
               itemBuilder: (context, index) {
                 debugPrint('index is $index');
                 return cubit.reels[index].video != null
-                    ? VideoPlayerWidget(videoName: cubit.reels[index].video!)
+                    ? VideoPlayerWidget(
+                        key: Key('${cubit.reels[index].video!}$index'),
+                        videoName: cubit.reels[index].video!)
                     : const ProblemWithVideoWidget();
               },
             );
