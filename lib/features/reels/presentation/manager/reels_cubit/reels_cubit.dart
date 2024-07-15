@@ -23,9 +23,9 @@ class ReelsCubit extends Cubit<ReelsState> {
     var data = await repo.getReels();
     data.fold(
       (l) => emit(GetReelsErrorState(errorMessage: l.errMessage)),
-      (r)  {
+      (r) {
         reels = r;
-         cacheInitialVideos();
+        cacheInitialVideos();
         emit(GetReelsSuccessState());
       },
     );
